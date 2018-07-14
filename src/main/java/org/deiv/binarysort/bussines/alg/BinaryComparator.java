@@ -20,13 +20,16 @@ public class BinaryComparator implements Comparator<Integer> {
     {
         int totalOnes = 0;
 
-        for (int idx=0; idx < Integer.BYTES; idx++) {
+        for (int idx=0; idx < Integer.BYTES * 4; idx++) {
+
+            /* obtenemos el primer bit */
             int firstBit = 0x1 & number;
 
             if (firstBit == 1) {
                 totalOnes++;
             }
 
+            /* desplazamos un bit a la derecha */
             number >>= 1;
         }
 

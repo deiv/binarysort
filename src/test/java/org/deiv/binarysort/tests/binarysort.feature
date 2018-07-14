@@ -15,6 +15,7 @@ Feature: Tests para el endpoint binarysort
     Examples:
       | entrada | salida |
       | 1, 15, 5, 7, 3 | 15, 7, 3, 5, 1 |
+      | 1, 115, 3, 2 | 115, 3, 1, 2 |
 
   Scenario: devuelve una lista vacia si la entrada está vacia
     Given request { "integer_list": [ ] }
