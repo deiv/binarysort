@@ -2,12 +2,10 @@ package org.deiv.binarysort.bussines.alg;
 
 import java.util.Comparator;
 
-public class BinaryComparator implements Comparator<String> {
-    public int compare(String a, String b)
-    {
-        Integer l = Integer.parseInt(a);
-        Integer r = Integer.parseInt(b);
+public class BinaryComparator implements Comparator<Integer> {
 
+    public int compare(Integer l, Integer r)
+    {
         int lCount = countBinaryOnes(l);
         int rCount = countBinaryOnes(r);
 

@@ -1,7 +1,7 @@
 package org.deiv.binarysort.service;
 
 import io.swagger.annotations.*;
-import org.deiv.binarysort.bussines.utils.SortUtils;
+import org.deiv.binarysort.bussines.RestBusinnes;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.deiv.binarysort.error.bussines.LogicException;
@@ -35,16 +35,9 @@ public class BinarySortService {
             return ResponseEntity.ok(buildResponse(null));
         }
 
-        String[] numberArray = input.split(",");
-
-        if (numberArray.length == 0) {
-            /* cero ?!?!?! uhm ... */
-            throw new LogicException();
-        }
-
         return ResponseEntity.ok(
             buildResponse(
-                SortUtils.binarySort(numberArray)));
+                RestBusinnes.doBinarySort(input)));
     }
 
     protected String parseRequestBody(String body)
@@ -60,7 +53,7 @@ public class BinarySortService {
         throw new MalformedInputException();
     }
 
-    protected String buildResponse(String [] result)
+    protected String buildResponse(Integer[] result)
     {
         return String.format(
             "{ \"result\": %s }",
