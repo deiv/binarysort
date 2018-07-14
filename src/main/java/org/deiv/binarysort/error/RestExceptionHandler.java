@@ -1,5 +1,6 @@
 package org.deiv.binarysort.error;
 
+import org.deiv.binarysort.error.bussines.LogicException;
 import org.deiv.binarysort.error.client.MalformedInputException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(RestExceptionHandler.class);
 
-    @ExceptionHandler({ MalformedInputException.class })
+    @ExceptionHandler({ MalformedInputException.class, LogicException.class })
     public ResponseEntity<?> handleRestException(Exception ex, WebRequest request)
     {
         ResponseStatus annotation = AnnotatedElementUtils.findMergedAnnotation(ex.getClass(), ResponseStatus.class);
