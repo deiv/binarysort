@@ -1,5 +1,7 @@
 package org.deiv.binarysort.bussines.alg;
 
+import org.springframework.cache.annotation.Cacheable;
+
 import java.util.Comparator;
 
 public class BinaryComparator implements Comparator<Integer> {
@@ -16,7 +18,8 @@ public class BinaryComparator implements Comparator<Integer> {
         return lCount < rCount ? 1 : -1;
     }
 
-    private int countBinaryOnes(int number)
+    @Cacheable(key = "binaryOnesCount")
+    public int countBinaryOnes(int number)
     {
         int totalOnes = 0;
 
