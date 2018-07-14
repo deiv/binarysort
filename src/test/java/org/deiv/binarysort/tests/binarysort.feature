@@ -23,23 +23,23 @@ Feature: Tests para el endpoint binarysort
     Then match header Content-Type == 'application/json;charset=UTF-8'
     Then match $ == { "result": [] }
 
-  Scenario: respondemos con error para entradas distintas de numeros enteros
-    Given request { "integer_list": [1, 15, "5", 7, 3] }
+  Scenario Outline: respondemos con error para entradas distintas de numeros enteros
+    Given request { "integer_list": [<entrada>] }
     When method POST
     Then status 400
-    Then match header Content-Type == 'application/json;charset=UTF-8'
     Then match $ == ''
 
-    Given request { "integer_list": [1, 15, 5.5, 7, 3] }
-    When method POST
-    Then status 400
-    Then match header Content-Type == 'application/json;charset=UTF-8'
-    Then match $ == ''
+    Examples:
+      | entrada |
+      | 1, 15, "5", 7, 3 |
+      | 1, 15, 5.5, 7, 3 |
+      | 1, 15, , ,, 1 7, 3 |
+      | 1, 15, 1 7, 3 |
+      | a, b, c, 3 |
 
   Scenario: respondemos con error para entradas con esquema no esperado
     Given request { "propiedad_noesperada": "valor_noesperado", "foo": "bar" }
     When method POST
     Then status 400
-    Then match header Content-Type == 'application/json;charset=UTF-8'
     Then match $ == ''
 
